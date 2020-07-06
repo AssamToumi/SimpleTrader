@@ -1,15 +1,17 @@
-﻿using SimpleTrader.WPF.State.Navigators;
+﻿using SimpleTrader.FinancialModelingPrepAPI.Services;
+using SimpleTrader.WPF.State.Navigators;
 using SimpleTrader.WPF.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
+using System.Text;
+using System.Collections.Generic;
 
 namespace SimpleTrader.WPF.Commands
 {
     public class UpdateCurrentViewModelCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
+
         private INavigator _navigator;
 
         public UpdateCurrentViewModelCommand(INavigator navigator)
@@ -31,7 +33,7 @@ namespace SimpleTrader.WPF.Commands
                 switch (viewType)
                 {
                     case ViewType.Home:
-                        _navigator.CurrentViewModel = new HomeViewModel(MajorIndexViewModel.LoadMajorIndexViewModel(new MajorIndexViewModel());
+                        _navigator.CurrentViewModel = new HomeViewModel(MajorIndexViewModel.LoadMajorIndexViewModel(new MajorIndexService()));
                         break;
                     case ViewType.Portfolio:
                         _navigator.CurrentViewModel = new PortfolioViewModel();
